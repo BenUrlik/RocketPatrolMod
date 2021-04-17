@@ -10,6 +10,9 @@ let game = new Phaser.Game(config);
 // set UI sizes
 let borderUISize = game.config.height / 15;
 let borderPadding = borderUISize / 3;
+let highScore = 0; 
+
+var rnd = Phaser.Math.RND;
 
 // reserve keyboard variables
 let keyF, keyR, keyLEFT, keyRIGHT;

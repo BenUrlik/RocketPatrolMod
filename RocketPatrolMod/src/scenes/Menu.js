@@ -6,9 +6,13 @@ class Menu extends Phaser.Scene {
     preload() {
         // load audio
         this.load.audio('sfx_select', './assets/blip_select12.wav');
-        this.load.audio('sfx_explosion', './assets/explosion38.wav');
+        this.load.audio('sfx_explosion_1', './assets/explosion38.wav');
+        this.load.audio('sfx_explosion_2', './assets/Hit_Hurt.wav');
+        this.load.audio('sfx_explosion_3', './assets/Hit_Hurt2.wav');
+        this.load.audio('sfx_explosion_4', './assets/Hit_Hurt3.wav');
         this.load.audio('sfx_rocket', './assets/rocket_shot.wav');
         this.load.audio('sfx_bg', './assets/bg.mp3');
+        
     }
 
     create() {
@@ -33,7 +37,7 @@ class Menu extends Phaser.Scene {
         this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press ← for Novice or → for Expert', menuConfig).setOrigin(0.5);
         
         // this.sound.play('sfx_rocket', {loop: true});
-        
+        this.add.text(0,0, 'High Score: ' + highScore, menuConfig).setOrigin(0);
         
         // define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
@@ -45,7 +49,7 @@ class Menu extends Phaser.Scene {
           // easy mode
           game.settings = {
             spaceshipSpeed: 3,
-            gameTimer: 60000    
+            gameTimer: 30000    
           }
           this.sound.play('sfx_select');
           this.scene.start('playScene');    
@@ -54,7 +58,7 @@ class Menu extends Phaser.Scene {
           // hard mode
           game.settings = {
             spaceshipSpeed: 4,
-            gameTimer: 45000    
+            gameTimer: 20000    
           }
           this.sound.play('sfx_select');
           this.scene.start('playScene');    

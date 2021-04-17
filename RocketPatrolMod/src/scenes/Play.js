@@ -61,8 +61,9 @@ class Play extends Phaser.Scene {
             },
             fixedWidth: 100
         }
+
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
-    
+        
         // GAME OVER flag
         this.gameOver = false;
         // 60-second play clock
@@ -72,9 +73,28 @@ class Play extends Phaser.Scene {
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
         }, null, this);
+
+        this.highScoreText = this.add.text(borderUISize + borderPadding*45, borderUISize + borderPadding*2, 'HS: ' + highScore, scoreConfig);
+        this.fireUI = this.add.text(borderUISize + borderPadding*35, borderUISize + borderPadding*2, 'Fire', scoreConfig);
     }
 
     update() {
+        // display score
+        let scoreConfig = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor: '#F3B141',
+            color: '#843605',
+            align: 'right',
+            padding: {
+            top: 5,
+            bottom: 5,
+            },
+            fixedWidth: 0
+        }
+        // console.log(Phaser.Math.RoundTo(123.456, 0));
+        this.timeElapsed = this.add.text(borderUISize + borderPadding*20, borderUISize + borderPadding*2, 'Time: ' + Phaser.Math.RoundTo(this.clock.elapsed/1000,2, 1), scoreConfig);
+        if(this.p1Score > highScore) { highScore = this.p1Score; }
         // check key input for restart
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
             this.scene.restart();
@@ -132,8 +152,11 @@ class Play extends Phaser.Scene {
         // score add and repaint
         this.p1Score += ship.points;
         this.scoreLeft.text = this.p1Score;
-        let num = game.rnd.integer();
-        console.log(num);
-        this.sound.play('sfx_explosion');
+        var val = rnd.between(1,4);
+        console.log(val);
+        if(val == 1) this.sound.play('sfx_explosion_1');
+        else if(val == 2) this.sound.play('sfx_explosion_2');
+        else if(val == 3) this.sound.play('sfx_explosion_3');
+        else this.sound.play('sfx_explosion_4');
     }
 }
