@@ -44,11 +44,11 @@ class Play extends Phaser.Scene {
 
         // add spaceships (x4)
         this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*4, 'spaceship', 0, 30).setOrigin(0, 0);
-        this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2, 'spaceship', 0, 20).setOrigin(0,0);
+        this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, borderUISize*8 + borderPadding*4, 'spaceship', 0, 20).setOrigin(0,0);
         this.ship03 = new Spaceship(this, game.config.width, borderUISize*6 + borderPadding*4, 'spaceship', 0, 10).setOrigin(0,0);
-        this.ship04 = new Spaceship(this, game.config.width - borderUISize*3, borderUISize*8 + borderPadding*4, 'spaceship2', 0, 40).setOrigin(0,0);
+        this.ship04 = new Spaceship(this, game.config.width - borderUISize*3, borderUISize*5 + borderPadding*2, 'spaceship2', 0, 40).setOrigin(0,0);
         this.ship04.moveSpeed = this.ship03.moveSpeed *2;
-
+        
         // animation config
         this.anims.create({
             key: 'explode',
@@ -122,7 +122,7 @@ class Play extends Phaser.Scene {
             this.ship02.update();
             this.ship03.update();
             this.ship04.update();
-            this.ship04.angle += 2; 
+            this.ship04.angle += 1; 
         } 
         else {  this.sound.get('sfx_bg').stop(); }
         // check collisions
