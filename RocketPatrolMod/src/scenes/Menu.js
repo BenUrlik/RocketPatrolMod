@@ -6,42 +6,48 @@ class Menu extends Phaser.Scene {
     preload() {
         // load audio
         this.load.audio('sfx_select', './assets/blip_select12.wav');
-        this.load.audio('sfx_explosion_1', './assets/explosion38.wav');
-        this.load.audio('sfx_explosion_2', './assets/Hit_Hurt.wav');
-        this.load.audio('sfx_explosion_3', './assets/Hit_Hurt2.wav');
-        this.load.audio('sfx_explosion_4', './assets/Hit_Hurt3.wav');
+        this.load.audio('sfx_explosion_1', './assets/Hit_Hurt.wav');
+        this.load.audio('sfx_explosion_2', './assets/Hit_Hurt2.wav');
+        this.load.audio('sfx_explosion_3', './assets/Hit_Hurt3.wav');
+        this.load.audio('sfx_explosion_4', './assets/Hit_Hurt4.wav');
         this.load.audio('sfx_rocket', './assets/rocket_shot.wav');
-        this.load.audio('sfx_bg', './assets/bg.mp3');
-        
+        this.load.image('titleScreen', './assets/titleScreen.png');
     }
 
     create() {
         // menu text configuration
         let menuConfig = {
-            fontFamily: 'Courier',
+            fontFamily: 'Time New Roman',
             fontSize: '28px',
             backgroundColor: '#F3B141',
-            color: '#843605',
+            color: '#000',
             align: 'right',
             padding: {
+            left: 5,
+            right: 5,
             top: 5,
             bottom: 5,
             },
             fixedWidth: 0
         }
         // show menu text
-        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2, 'Use ←→ arrows to move & (F) to fire', menuConfig).setOrigin(0.5);
-        menuConfig.backgroundColor = '#00FF00';
-        menuConfig.color = '#000';
-        this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press ← for Novice or → for Expert', menuConfig).setOrigin(0.5);
+        this.titleScreen = this.add.tileSprite(0,0,640,480, 'titleScreen').setOrigin(0,0);
+        this.add.text(game.config.width * .25, game.config.height *.25 - borderUISize - borderPadding, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
+        menuConfig.backgroundColor = '#FFFF00';
+        this.add.text(game.config.width*.70, game.config.height *.55, 'Use ←→ arrows to move', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width*.70, game.config.height*.45, 'Instructions:', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width*.70, game.config.height*.65, '& F to Fire', menuConfig).setOrigin(0.5);
         
-        // this.sound.play('sfx_rocket', {loop: true});
-        this.add.text(0,0, 'High Score: ' + highScore, menuConfig).setOrigin(0);
+        
+        menuConfig.backgroundColor = '#00FF00';
+        this.add.text(game.config.width * .25,game.config.height*.25, 'High Score: ' + highScore, menuConfig).setOrigin(0.5);
+        menuConfig.backgroundColor = '#F3B141';
+        this.add.text(game.config.width/2, game.config.height*.70 + borderUISize + borderPadding, 'To Start: Press ← for Novice or → for Expert', menuConfig).setOrigin(0.5);
         
         // define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+        
     }
 
     update() {
