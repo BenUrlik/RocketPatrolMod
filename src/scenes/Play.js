@@ -94,6 +94,7 @@ class Play extends Phaser.Scene {
         var remaining_time = (this.game.settings.gameTimer/1000) - Phaser.Math.RoundTo(this.clock.elapsed/1000,2, 1);
         this.timeElapsed.setText('Time: ' + remaining_time);
 
+        
         if(this.p1Score > highScore) { 
             highScore = this.p1Score; 
             this.highScoreText.setText('HS: ' + highScore);
