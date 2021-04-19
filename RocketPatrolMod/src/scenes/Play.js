@@ -55,21 +55,6 @@ class Play extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 9, first: 0}),
             frameRate: 30
         });
-
-        // this.emit_particles = false;
-        // var explosion_particles = this.add.particles('flares');
-        // var emitter = explosion_particles.createEmitter({
-        //     x: 400,
-        //     y: 300,
-        //     speed: 200,
-        //     lifespan: 500,
-        //     blendMode: 'ADD',
-        //     frequency: 50,
-        //     maxParticles: 10,
-        //     alpha: {start: 1, end: 0},
-        //     scale: {start:1, end:0},
-        //     on: false
-        // });
               
         // initialize score
         this.p1Score = 0;
@@ -137,13 +122,13 @@ class Play extends Phaser.Scene {
             this.ship02.update();
             this.ship03.update();
             this.ship04.update();
-            this.ship04.angle += 2;
+            this.ship04.angle += 2; 
         } 
         else {  this.sound.get('sfx_bg').stop(); }
         // check collisions
         if(this.checkCollision(this.p1Rocket, this.ship03)) {
             this.p1Rocket.reset();
-            this.shipExplode(this.ship03);   
+            this.shipExplode(this.ship03); 
         }
         if (this.checkCollision(this.p1Rocket, this.ship02)) {
             this.p1Rocket.reset();
@@ -174,6 +159,19 @@ class Play extends Phaser.Scene {
     shipExplode(ship) {
         // temporarily hide ship
         ship.alpha = 0;
+        // this.emit_particles = false;
+        this.particles = this.add.particles('flares');
+        this.emitter = this.particles.createEmitter({
+            speed: 200,
+            lifespan: 500,
+            blendMode: 'ADD',
+            frequency: 50,
+            maxParticles: 100,
+            alpha: {start: 1, end: 0},
+            scale: {start:.75, end:0}
+        });
+        this.particles.emitParticleAt(ship.x,ship.y,100);
+        
         // create explosion sprite at ship's position
         let boom = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(0, 0);
         boom.anims.play('explode');             // play explode animation
@@ -182,6 +180,7 @@ class Play extends Phaser.Scene {
           ship.alpha = 1;                       // make ship visible again
           boom.destroy();                       // remove explosion sprite
         });       
+        
         // score add and repaint
         this.p1Score += ship.points;
         this.scoreLeft.text = this.p1Score;

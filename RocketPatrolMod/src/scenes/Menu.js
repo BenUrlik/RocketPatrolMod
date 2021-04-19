@@ -17,7 +17,7 @@ class Menu extends Phaser.Scene {
     create() {
         // menu text configuration
         let menuConfig = {
-            fontFamily: 'Time New Roman',
+            fontFamily: 'Comic Sans MS	',
             fontSize: '28px',
             backgroundColor: '#F3B141',
             color: '#000',
@@ -40,7 +40,7 @@ class Menu extends Phaser.Scene {
         
         
         menuConfig.backgroundColor = '#00FF00';
-        this.add.text(game.config.width * .25,game.config.height*.25, 'High Score: ' + highScore, menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width * .25,game.config.height*.26, 'High Score: ' + highScore, menuConfig).setOrigin(0.5);
         menuConfig.backgroundColor = '#F3B141';
         this.add.text(game.config.width/2, game.config.height*.70 + borderUISize + borderPadding, 'To Start: Press ← for Novice or → for Expert', menuConfig).setOrigin(0.5);
         
